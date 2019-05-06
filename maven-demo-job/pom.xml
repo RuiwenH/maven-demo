@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.reven</groupId>
+		<artifactId>maven-demo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>maven-demo-job</artifactId>
+	<version>0.0.2</version>
+	<packaging>war</packaging>
+	<name>maven-demo-job</name>
+	<url>http://maven.apache.org</url>
+	<description>定时任务</description>
+	<dependencies>
+		<dependency>
+			<groupId>com.reven</groupId>
+			<artifactId>maven-demo-web</artifactId>
+			<version>0.0.1</version>
+			<type>war</type>
+		</dependency>
+		<!-- 用于编译 -->
+		<dependency>
+			<groupId>com.reven</groupId>
+			<artifactId>maven-demo-web</artifactId>
+			<version>0.0.1</version>
+			<classifier>classes</classifier>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>maven-demo-job</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<!-- 指定文件 -->
+					<packagingIncludes>
+						WEB-INF/web.xml,
+						WEB-INF/classes/**,
+						WEB-INF/lib/**
+					</packagingIncludes>
+					<outputDirectory>${project.outputDirectory}/demo-job</outputDirectory>
+				</configuration>
+				<executions> <!-- 在打包之前执行，打包后包含已经执行后的文件 -->
+					<execution>
+						<id>prepare-war</id>
+						<phase>prepare-package</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
