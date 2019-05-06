@@ -48,7 +48,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.2</version>
 				<configuration>
-					<!-- 指定文件 -->
+					<!-- 指定文件，避免把maven-demo-web中的页面也打包 -->
 					<packagingIncludes>
 						WEB-INF/web.xml,
 						WEB-INF/classes/**,
